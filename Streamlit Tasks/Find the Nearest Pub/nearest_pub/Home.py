@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 ################################## DATAFRAME CODES #######################################
-df = pd.read_csv('data/open_pubs.csv')
+df = pd.read_csv(r"C:\Users\91739\Downloads\open_pubs (1).csv")
 df.columns = ['fsa_id', 'name', 'address', 'postcode', 'easting', 'northing', 'latitude', 'longitude', 'local_authority']
 df = df.replace('\\N', np.NaN)
 df = df.dropna()
