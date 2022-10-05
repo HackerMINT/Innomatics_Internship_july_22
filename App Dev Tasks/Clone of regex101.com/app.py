@@ -1,33 +1,30 @@
-# import flask 
+# Step 1 - Importing important modules.
+from ast import And
+from flask import Flask, render_template, request
 import re
-from unittest import result
-from flask import Flask, render_template,request
 
-# Create the Object 
+# Step 2 - Instantiating or creating object.
 app = Flask(__name__)
 
-# Define the Routes and bind it with a Function
-@app.route('/',methods=['GET','POST'])
-def regex101():
-    if request.method=='POST':
-        xprsn = request.form['xpn']
-        tststrng = request.form['tst']
-        cnt=0
-        if (len(xprsn) ==0 or len(tststrng) == 0):
-            cnt=-1
-            return render_template("index.html",result="Please provide input",count=cnt)
-        else:
-            lst=[]
-            for match in re.finditer(r'{}'.format(xprsn),tststrng):
-                stn=''
-                cnt+=1
-                stn=stn+"Match {} \"{}\" at start and end indices [{} , {}]".format(cnt,match.group(),match.start(),match.end())
-                lst.append(stn)
-            return render_template("index.html",result ="Matches found", xpn=xprsn, tst=tststrng, lsts=lst, count=cnt)
-
-    return render_template("index.html",count=-1)
-
+#########################################################################################
+# Step 3 - Creating routes and binding with functionality.
+@app.route('/', methods = ['GET', 'POST'])
+def home_page():
     
-# Run the App
-if __name__=='__main__':
-    app.run(debug=True)
+    if request.method == 'POST':
+        pat = request.form['in_re']
+        str = request.form['in_str']
+
+        pattern = re.compile(pat)
+        n = str
+
+        total = len(pattern.findall(n))
+        matched = pattern.findall(n)
+
+        return render_template("home.html", a = total, b = matched, c = pat, n = str)
+    return render_template("home.html")
+
+#########################################################################################
+# Step 4 - Running the app.
+if __name__ == '__main__':
+    app.run(debug = True)
