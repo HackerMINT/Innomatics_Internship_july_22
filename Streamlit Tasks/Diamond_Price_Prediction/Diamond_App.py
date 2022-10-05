@@ -7,7 +7,7 @@ from pickle import load
 
 
 ################################## DATAFRAME CODES #######################################
-df = pd.read_csv("diamonds.csv")
+df = pd.read_csv(r"C:\Users\91739\Downloads\diamonds (1).csv")
 df.rename(columns={'x':'length', 'y':'width', 'z':'depth', 'depth':'depth%'}, inplace = True)
 df_target = df[['price']]
 df = df.drop('price', axis = 1)
